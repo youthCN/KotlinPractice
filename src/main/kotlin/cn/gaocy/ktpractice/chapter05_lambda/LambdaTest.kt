@@ -27,6 +27,9 @@ fun sum2(a: Int, b: Int, op: (Int, Int) -> Int): Int {
 }
 
 fun main(args: Array<String>) {
+
+    sum2(1,2,{a,b ->a+b})
+
     //成员引用----------------------------------------
     val person = Person("gcy")
     val name = Person::name
