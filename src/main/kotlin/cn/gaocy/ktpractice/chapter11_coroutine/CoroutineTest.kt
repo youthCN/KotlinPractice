@@ -13,8 +13,7 @@ LAZY	只有在需要的情况下运行     LAZY 是懒汉式启动，launch 后�
 
 suspend fun main() {
     log(1)
-    val job1 = GlobalScope.launch {
-        CoroutineStart.DEFAULT
+    val job1 = GlobalScope.launch(start = CoroutineStart.DEFAULT) {
         log(2)
     }
     log(3)
@@ -28,14 +27,15 @@ suspend fun main() {
 22:16:39:539 [DefaultDispatcher-worker-1] ---- 4
 */
 
-    log(1)
-    val job2 = GlobalScope.launch(start = CoroutineStart.LAZY) {
-        log(2)
-    }
-    log(3)
-    job2.start()
-    //job2.join()
-    log(4)
+//    log(1)
+//    val job2 = GlobalScope.launch(start = CoroutineStart.LAZY) {
+//        log(2)
+//    }
+//    log(3)
+//    job2.start()
+//    //job2.join()
+//    log(4)
+
 
 
 }
