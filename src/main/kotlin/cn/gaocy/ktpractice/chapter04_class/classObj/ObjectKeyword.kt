@@ -82,5 +82,25 @@ fun main(args: Array<String>) {
         }
     })
 
+    Thread(object: Runnable{
+        override fun run() {
+
+        }
+    })
+
+    Thread(Runnable{
+        fun run() {
+
+        }
+    })
+
+    Thread({
+
+    })
+
+    Thread(){
+
+    }
+
 
 }

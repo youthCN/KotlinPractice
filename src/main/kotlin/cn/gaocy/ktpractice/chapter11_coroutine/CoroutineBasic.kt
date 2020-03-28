@@ -16,8 +16,13 @@ fun main() = runBlocking { // this: CoroutineScope
             println("coroutineScope 3 ...")
         }
         println("coroutineScope 2 ...")
+        coroutineScope {
+            println("coroutineScope 4 ...")
+            delay(2000L)
+            println("coroutineScope 5 ...")
+        }
     }
-    /*val job1 = GlobalScope.launch {
+    /*val job1 = GlobalScope.launch {   在 GlobalScope 中启动的活动协程并不会使进程保活。它们就像守护线程。和coroutineScope不一样
         println("coroutineScope 1 ...")
         delay(2000L)
         println("coroutineScope 2 ...")
