@@ -68,8 +68,8 @@ public class RetrofitAuthCodeJava {
                                         String resultStr = currentTimePretty+"|"+receiveCodeNo+"|"+authCode;
                                         bw.write(resultStr);
                                         bw.newLine();
+                                        bw.flush();
                                     }
-                                    bw.flush();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     System.out.println("请求失败, 写文件错误..."+e.toString());
