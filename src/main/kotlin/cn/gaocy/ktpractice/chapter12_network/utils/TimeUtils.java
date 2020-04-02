@@ -22,8 +22,14 @@ public final class TimeUtils {
         return sdf.format(date);
     }
 
+    public static String getCurrentTimePretty(long currentTime) {
+        Date date = new Date(currentTime);
+        SimpleDateFormat sdf = new SimpleDateFormat(DateFormat);
+        return sdf.format(date);
+    }
+
     public static long getOneDayStartMillis(long currentTimeMillis) {
-        long currentDayMillis = currentTimeMillis / ONE_DAY_MILLIS * ONE_DAY_MILLIS - TimeZone.getDefault().getRawOffset();
+        long currentDayMillis = currentTimeMillis / ONE_DAY_MILLIS * ONE_DAY_MILLIS - TimeZone.getDefault().getRawOffset() + ONE_DAY_MILLIS;
         return currentDayMillis;
     }
 }
