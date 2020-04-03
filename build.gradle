@@ -1,17 +1,18 @@
-buildscript{
+buildscript {
     ext.kotlin_version = '1.3.50'
     ext.kotlinx_coroutines_core_version = '1.3.4'
 }
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
 }
 /**添加两行代码,指出导出的是程序*/
 apply plugin: 'application'
 //尽管包名为Counter.kt,但这里指出类为CounterKt
-mainClassName = 'cn.gaocy.ktpractice.chapter12_network.RetrofitAuthCode'
+mainClassName = 'cn.gaocy.authcode.RetrofitAuthCodeJava'
 
-group 'cn.gaocy'
+group 'cn.gaocy.authCode'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -45,4 +46,76 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {//不可用
+    configurations.runtime.each { println it.path }
+    project.configurations.implementation.setCanBeResolved(true)
+    println "========="
+    configurations.implementation.each { println it.path }
+    println "========="
+
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                "Main-Class": "cn.gaocy.authcode.RetrofitAuthCodeJava"
+        )
+    }
+    from {
+        //添加依懒到打包文件
+        configurations.implementation.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtime.collect { zipTree(it) }
+    }
+}
+//可用
+task makePlayerJar(dependsOn: ['build'], type: Jar) {
+    archiveName = 'AuthCode.jar'// jar命名
+    manifest {
+        attributes(
+//                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                "Main-Class": "cn.gaocy.authcode.RetrofitAuthCodeJava"//指定Main入口
+        )
+    }
+    from('build/classes/java/main/')// 代码来源cn/gaocy/authcode/
+    from(configurations.compile.findAll {
+        !it.getName().startsWith('junit') && !it.getName().startsWith('hamcrest')
+    }.collect {
+        println '----------------'
+        println zipTree(it)
+        it.isDirectory() ? it : zipTree(it)
+    })
+    from(project.zipTree('libs/converter-gson-2.5.0.jar'))
+    from(project.zipTree('libs/gson-2.8.2.jar'))
+    from(project.zipTree('libs/okhttp-3.12.0.jar'))
+    from(project.zipTree('libs/retrofit-2.5.0.jar'))
+    from(project.zipTree('libs/okio-1.15.0.jar'))
+    destinationDir = file('result/libs')
+    include('cn/gaocy/authcode/*.class')
+    include('cn/gaocy/authcode/**/*.class')
+    include('com/google/gson/*.class')
+    include('com/google/gson/**/*.class')
+    include('okhttp3/*.class')
+    include('okio/*.class')
+    include('okhttp3/**/*.class')
+    include('retrofit2/*.class')
+    include('retrofit2/**/*.class')
+    include('retrofit2/converter/gson/*.class')
+//    include('tv/danmaku/ijk/media/player/*.class')
+//    include('tv/danmaku/ijk/media/player/**/*.class')
+//    include('tv/danmaku/ijk/media/exo/*.class')
+//    include('tv/danmaku/ijk/media/exo/**/*.class')
+//    include('tv/danmaku/ijk/media/exo/**/**/*.class')
+//    include('com/google/android/exoplayer2/**/*.class')
+//    include('com/google/android/exoplayer2/**/**/*.class')
+//    include('com/google/android/exoplayer2/source/dash/*.class')
+//    include('com/google/android/exoplayer2/source/dash/**/*.class')
+//    include('com/google/android/exoplayer2/source/hls/*.class')
+//    include('com/google/android/exoplayer2/source/hls/**/*.class')
+//    include('com/google/android/exoplayer2/source/smoothstreaming/*.class')
+//    include('com/google/android/exoplayer2/source/smoothstreaming/**/*.class')
+//    include('com/google/android/exoplayer2/ui/*.class')
+//    include('master/flame/danmaku/*.class')
+//    include('master/flame/danmaku/**/*.class')
+//    include('master/flame/danmaku/**/**/*.class')
+//    include('master/flame/danmaku/**/**/**/*.class')
 }
