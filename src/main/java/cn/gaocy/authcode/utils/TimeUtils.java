@@ -29,7 +29,7 @@ public final class TimeUtils {
     }
 
     public static long getOneDayStartMillis(long currentTimeMillis) {
-        long currentDayMillis = currentTimeMillis / ONE_DAY_MILLIS * ONE_DAY_MILLIS - TimeZone.getDefault().getRawOffset() + ONE_DAY_MILLIS;
+        long currentDayMillis = currentTimeMillis / ONE_DAY_MILLIS * ONE_DAY_MILLIS - TimeZone.getDefault().getRawOffset();
         return currentDayMillis;
     }
 }
