@@ -27,7 +27,7 @@ public class RetrofitAuthCodeJava {
         if (!file.exists()) {
             try {
                 if (!file.createNewFile()) {
-                    System.out.println("创建文件失败....");
+                    System.out.println("create file failed....");
                     Thread.sleep(1000);
                     return;
                 }
@@ -80,16 +80,16 @@ public class RetrofitAuthCodeJava {
                             }
                             return;
                         }
-                        System.out.println("请求失败, 参数错误..."+smsRest.getMsg());
+                        System.out.println("request failed, params error..."+smsRest.getMsg());
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println("请求失败, 网络故障..."+e.toString());
+                        System.out.println("request failed, parse error..."+e.toString());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    System.out.println("请求失败, 网络故障..."+t.toString());
+                    System.out.println("request failed,network..."+t.toString());
                 }
             });
             try {
