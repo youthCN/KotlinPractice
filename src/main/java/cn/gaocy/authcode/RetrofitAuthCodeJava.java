@@ -52,7 +52,7 @@ public class RetrofitAuthCodeJava {
                         SmsRest smsRest = gson.fromJson(resultJson, SmsRest.class);
                         int code = smsRest.getCode();
                         if (code == 0) {
-                            System.out.println("请求成功:)");
+                            System.out.println("request succeed :)");
                             synchronized (lock) {
                                 FileWriter fileWriter = null;
                                 BufferedWriter bw = null;
@@ -72,7 +72,7 @@ public class RetrofitAuthCodeJava {
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    System.out.println("请求失败, 写文件错误..."+e.toString());
+                                    System.out.println("request failed, write file error..."+e.toString());
                                 } finally {
                                     IOUtil.closeQuietly(bw);
                                     IOUtil.closeQuietly(fileWriter);

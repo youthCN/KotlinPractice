@@ -69,7 +69,7 @@ jar {//不可用
 }
 //可用
 task makePlayerJar(dependsOn: ['build'], type: Jar) {
-    archiveName = 'AuthCode.jar'// jar命名
+    archiveName = 'AuthCodeHelper.jar'// jar命名
     manifest {
         attributes(
 //                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
