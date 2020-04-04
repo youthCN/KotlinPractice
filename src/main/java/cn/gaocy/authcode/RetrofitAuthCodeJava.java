@@ -52,7 +52,7 @@ public class RetrofitAuthCodeJava {
                         SmsRest smsRest = gson.fromJson(resultJson, SmsRest.class);
                         int code = smsRest.getCode();
                         if (code == 0) {
-                            System.out.println("request succeed :)");
+                            System.out.print(":) ");
                             synchronized (lock) {
                                 FileWriter fileWriter = null;
                                 BufferedWriter bw = null;

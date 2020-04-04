@@ -60,16 +60,16 @@ public class RetrofitFactory {
         /**
          * 日志拦截器
          */
-//        if (BuildConfig.DEBUG) {
-        HttpLogInterceptor loggingInterceptor = new HttpLogInterceptor(new HttpLogInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                System.out.println(LOG_TAG+ message);
-            }
-        });
-        loggingInterceptor.setLevel(HttpLogInterceptor.Level.HEADERS);
-        okHttpBuilder.addInterceptor(loggingInterceptor);
-//        }
+        if (1 < 0) {//不打开日志拦截器
+            HttpLogInterceptor loggingInterceptor = new HttpLogInterceptor(new HttpLogInterceptor.Logger() {
+                @Override
+                public void log(String message) {
+                    System.out.println(LOG_TAG + message);
+                }
+            });
+            loggingInterceptor.setLevel(HttpLogInterceptor.Level.HEADERS);
+            okHttpBuilder.addInterceptor(loggingInterceptor);
+        }
 
         /**
          * 设置超时和重新连接
