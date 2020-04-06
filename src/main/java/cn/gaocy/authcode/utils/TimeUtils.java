@@ -9,7 +9,7 @@ public final class TimeUtils {
     private TimeUtils() {
     }
 
-    public static final String DateFormat = "yyyy-MM-dd_HH:mm:ss:SSS";
+    public static final String DateFormat = "yyyy-MM-dd HH:mm:ss:SSS";
 
     public static final long ONE_DAY_MILLIS = 86400000L;
 
