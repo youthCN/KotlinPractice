@@ -52,7 +52,8 @@ public class RetrofitAuthCodeJava {
         }
 
         while (true) {
-            String sendTime = String.valueOf(TimeUtils.getCurrentDayMillis());
+//            String sendTime = String.valueOf(TimeUtils.getCurrentDayMillis());
+            String sendTime = String.valueOf(System.currentTimeMillis());
             HttpApi httpApi = RetrofitFactory.getInstance().getHttpApi();
             Map<String, String> map = new HashMap<String, String>();
             map.put("func", "querySmsAuthCode");
@@ -72,12 +73,15 @@ public class RetrofitAuthCodeJava {
                             synchronized (lock) {
                                 try {
                                     List<SmsAuthCode> result = smsRest.getResult();
-                                    for (SmsAuthCode smsAuthCode : result) {
+                                    int size = result.size();
+                                    for (int i = 0; i < size; i++) {
+                                        SmsAuthCode smsAuthCode = result.get(i);
                                         if (!allSmsAuthCode.contains(smsAuthCode)) {
                                             allSmsAuthCode.add(smsAuthCode);
                                             String sendCodeNo = smsAuthCode.getSendCodeNo();
                                             String receiveCodeNo = smsAuthCode.getReceiveCodeNo();
-                                            String currentTimePretty = TimeUtils.getCurrentTimePretty(smsAuthCode.getSendTime());
+//                                            String currentTimePretty = TimeUtils.getCurrentTimePretty(smsAuthCode.getSendTime());
+                                            String currentTimePretty = String.valueOf(i);
                                             String authCode = smsAuthCode.getAuthCode();
                                             String resultStr = currentTimePretty + "|" + receiveCodeNo + "|" + authCode;
                                             bw.write(resultStr);
