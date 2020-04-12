@@ -50,10 +50,9 @@ public class RetrofitAuthCodeJava {
                 e1.printStackTrace();
             }
         }
-
-        while (true) {
+        final String sendTime = String.valueOf(System.currentTimeMillis());
 //            String sendTime = String.valueOf(TimeUtils.getCurrentDayMillis());
-            String sendTime = String.valueOf(System.currentTimeMillis());
+        while (true) {
             HttpApi httpApi = RetrofitFactory.getInstance().getHttpApi();
             Map<String, String> map = new HashMap<String, String>();
             map.put("func", "querySmsAuthCode");
