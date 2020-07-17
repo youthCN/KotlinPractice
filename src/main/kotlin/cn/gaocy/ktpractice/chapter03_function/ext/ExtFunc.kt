@@ -22,3 +22,11 @@ fun <T> Collection<T>.myJoinToString(sep: String = ",", prefix: String = "[", po
     result.append(postfix)
     return result.toString()
 }
+
+fun main(args:Array<String>) {
+    val array = arrayOf(2,1,2);
+    val list0 = arrayListOf<Int>(*array)//使用展开数据
+    val list1 = listOf<Int>(1,2,3)
+    val mapOf0 = mapOf<Int, String>(1 to "a", 2 to "b")
+
+}
